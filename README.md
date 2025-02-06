@@ -10,11 +10,11 @@
 - Elixir 💧 (*)
 - Js 📃 (**)
 #### IT-Knowledge
-- Computer Hardware
-- Operating System Installation and Utillitisation
-  - Windows (****)
-  - Ubuntu (***)
-  - IOS (*)
-- Microsoft Office / Microsoft 365
+- Computer Hardware 🤓
+- Operating System Installation and Utillitisation 🖥️
+  - Windows 🪟 (****)
+  - Ubuntu 🐧 (***)
+  - IOS 🍎 (*)
+- Microsoft Office / Microsoft 365 
 #### Occupation
 - Student 🧑🏻‍🎓
