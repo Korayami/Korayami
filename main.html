@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Crosshair Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DIN+Condensed:wght@700&display=swap');
+
+        body {
+            font-family: 'DIN Condensed', sans-serif;
+            background-color: #0F1923;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #1B2733;
+            border-radius: 8px;
+            border: 2px solid #7289DA;
+            box-shadow: 0 0 10px rgba(114, 137, 218, 0.5);
+        }
+
+        h2 {
+            color: #FFFFFF;
+            font-size: 24px;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input[type="range"] {
+            width: 60%;
+            appearance: none;
+            height: 6px;
+            background: #7289DA;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #7289DA;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #0F1923;
+            color: #FFFFFF;
+            font-size: 14px;
+            font-family: monospace;
+            resize: none;
+            text-transform: none;
+        }
+
+        /* Crosshair Preview */
+        .crosshair-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        canvas {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid #7289DA;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Valorant Crosshair Generator</h2>
+
+        <div class="crosshair-container">
+            <canvas id="crosshairCanvas" width="200" height="200"></canvas>
+        </div>
+
+        <div class="input-group">
+            <label class="label">Outline Opacity</label>
+            <input type="range" id="outlineOpacity" min="0" max="1" step="0.1" value="1" oninput="updateCode()">
+        </div>
+
+        <div class="input-group">
+            <label class="label">Outline Thickness</label>
+            <input type="range" id="outlineThickness" min="0" max="5" step="1" value="1" oninput="updateCode()">
+        </div>
+
+        <div class="input-group">
+            <label class="label">Center Dot</label>
+            <input type="checkbox" id="centerDot" onchange="updateCode()">
+        </div>
+
+        <div class="input-group">
+            <label class="label">Inner Line Length</label>
+            <input type="range" id="innerLineLength" min="0" max="10" step="1" value="2" oninput="updateCode()">
+        </div>
+
+        <div class="input-group">
+            <label class="label">Inner Line Thickness</label>
+            <input type="range" id="innerLineThickness" min="0" max="5" step="1" value="1" oninput="updateCode()">
+        </div>
+
+        <div class="input-group">
+            <label class="label">Inner Line Opacity</label>
+            <input type="range" id="innerLineOpacity" min="0" max="1" step="0.1" value="1" oninput="updateCode()">
+        </div>
+
+        <div class="input-group">
+            <label class="label">Generated Crosshair Code</label>
+        </div>
+        <textarea id="crosshairCode" readonly></textarea>
+    </div>
+
+    <script>
+        function updateCode() {
+            const outlineOpacity = parseFloat(document.getElementById('outlineOpacity').value);
+            const outlineThickness = parseInt(document.getElementById('outlineThickness').value);
+            const centerDot = document.getElementById('centerDot').checked;
+            const innerLineLength = parseInt(document.getElementById('innerLineLength').value);
+            const innerLineThickness = parseInt(document.getElementById('innerLineThickness').value);
+            const innerLineOpacity = parseFloat(document.getElementById('innerLineOpacity').value);
+
+            const crosshairCode = `0;s;1;P;o;${outlineOpacity};b;${outlineThickness};t;${centerDot ? 1 : 0};0l;${innerLineLength};0a;${innerLineOpacity};0f;${innerLineThickness};1b;0;S;b;1;c;8;`;
+
+            document.getElementById('crosshairCode').value = crosshairCode;
+
+            drawCrosshair(outlineOpacity, outlineThickness, centerDot, innerLineLength, innerLineThickness, innerLineOpacity);
+        }
+
+        function drawCrosshair(outlineOpacity, outlineThickness, centerDot, innerLineLength, innerLineThickness, innerLineOpacity) {
+            const canvas = document.getElementById('crosshairCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+
+            ctx.strokeStyle = `rgba(255, 255, 255, ${innerLineOpacity})`;
+            ctx.lineWidth = innerLineThickness;
+
+            // Draw horizontal line
+            ctx.beginPath();
+            ctx.moveTo(centerX - innerLineLength * 10, centerY);
+            ctx.lineTo(centerX + innerLineLength * 10, centerY);
+            ctx.stroke();
+
+            // Draw vertical line
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY - innerLineLength * 10);
+            ctx.lineTo(centerX, centerY + innerLineLength * 10);
+            ctx.stroke();
+
+            // Draw center dot
+            if (centerDot) {
+                ctx.fillStyle = `rgba(255, 255, 255, ${innerLineOpacity})`;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, 3, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+
+            // Draw outline
+            if (outlineThickness > 0) {
+                ctx.strokeStyle = `rgba(0, 0, 0, ${outlineOpacity})`;
+                ctx.lineWidth = outlineThickness + 2;
+
+                // Horizontal outline
+                ctx.beginPath();
+                ctx.moveTo(centerX - innerLineLength * 10, centerY);
+                ctx.lineTo(centerX + innerLineLength * 10, centerY);
+                ctx.stroke();
+
+                // Vertical outline
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY - innerLineLength * 10);
+                ctx.lineTo(centerX, centerY + innerLineLength * 10);
+                ctx.stroke();
+            }
+        }
+
+        updateCode();
+    </script>
+</body>
+</html>
