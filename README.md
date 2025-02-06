@@ -2,8 +2,8 @@
 
 ### About Me
 #### Languages 
-- English
-- German
+- English 🇬🇧
+- German 🇩🇪
 #### Programming languages
 - Java ♨️ (***) 
 - C# #️⃣ (*) 
