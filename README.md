@@ -14,7 +14,7 @@
 - Operating System Installation and Utillitisation 🖥️
   - Windows 🪟 (****)
   - Ubuntu 🐧 (***)
-  - IOS 🍎 (*)
+  - IOS 🍎 (***)
 - Microsoft Office / Microsoft 365 
 #### Occupation
 - Student 🧑🏻‍🎓
