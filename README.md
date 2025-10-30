@@ -7,7 +7,7 @@
 #### Programming languages
 - Java ♨️ (***) 
 - C# #️⃣ (*) 
-- Elixir 💧 (*)
+- Elixir 💧 (***)
 - Js 📃 (**)
 #### IT-Knowledge
 - Computer Hardware 🤓
