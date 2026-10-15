@@ -5,16 +5,18 @@
 - English 🇬🇧
 - German 🇩🇪
 #### Programming languages
+- Python 🐍 (*****)
 - Java ♨️ (***) 
 - C# #️⃣ (*) 
 - Elixir 💧 (***)
-- Js 📃 (**)
+- JS 📃 (**)
 #### IT-Knowledge
 - Computer Hardware 🤓
 - Operating System Installation and Utillitisation 🖥️
   - Windows 🪟 (****)
-  - Ubuntu 🐧 (***)
-  - IOS 🍎 (***)
+  - Linux 🐧 (*****)
+  - IOS 🍎 (****)
 - Microsoft Office / Microsoft 365 
 #### Occupation
 - Student 🧑🏻‍🎓
+- Software Developer and Data Analyst 📊
